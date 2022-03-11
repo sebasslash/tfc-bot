@@ -1,6 +1,10 @@
 package models
 
-import "github.com/hashicorp/go-tfe"
+import (
+	"encoding/json"
+
+	"github.com/hashicorp/go-tfe"
+)
 
 type RunNotification struct {
 	Message string `json:"message"`
@@ -25,4 +29,12 @@ type Notification struct {
 	Organization  string `json:"organization"`
 
 	RunNotifications []*RunNotification `json:"notifications"`
+}
+
+func (n *Notification) MarshalBinary() ([]byte, error) {
+	return json.Marshal(n)
+}
+
+func (r *RunNotification) MarshalBinary() ([]byte, error) {
+	return json.Marshal(r)
 }
