@@ -37,7 +37,7 @@ func (c *CommandManager) notifyHandler(s *discordgo.Session, m *discordgo.Messag
 	go func() {
 		rw := &workers.RunWorker{
 			WorkspaceID: w.ID,
-			Info:        RawEmbeds,
+			Info:        Info,
 		}
 
 		rw.Subscribe(c.Ctx)
