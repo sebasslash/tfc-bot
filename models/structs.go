@@ -39,6 +39,7 @@ type EmbedMessage struct {
 }
 
 var PrettyStatus map[tfe.RunStatus]string = map[tfe.RunStatus]string{
+	tfe.RunPending:        "Run Pending ⏸",
 	tfe.RunPlanning:       "Planning 🔁",
 	tfe.RunPlanned:        "Plan successful ✅",
 	tfe.RunPlanQueued:     "Plan Queued ⏸",

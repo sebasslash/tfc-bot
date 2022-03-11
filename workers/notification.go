@@ -43,8 +43,6 @@ func (w *NotificationWorker) CreateConfiguration(ctx context.Context) error {
 		return err
 	}
 
-	fmt.Println("ID: ", nc.ID)
-
 	err = store.DB.AddConfiguration(ctx, nc.ID, w.ChannelID)
 	if err != nil {
 		return err
