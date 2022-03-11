@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  bot:
+    build: .
+    ports:
+      - "8000:10000"
+    volumes:
+      - ./:/tfc-bot-vol
+    environment:
+      TFC_BOT_TOKEN:
+      TFC_BOT_WEBHOOK_URL:
+      REDIS_HOST:
+      REDIS_PORT: 
+      REDIS_PASSWORD: 
+      TFE_TOKEN:       
+      TFE_ADDRESS:
+    depends_on:
+      - redis
+    links:
+      - redis
+  redis:
+    image: "redis:alpine"
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --loglevel warning --requirepass MY_COOL_PASSWORD 
+    volumes:
+      - store:/data
+volumes:
+  store:
+    driver: local
