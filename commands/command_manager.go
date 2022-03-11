@@ -22,8 +22,8 @@ type CommandManager struct {
 
 func (c *CommandManager) Init() {
 	c.handlers = make(map[string]func(*discordgo.Session, *discordgo.MessageCreate, []string))
-	c.handlers["watch"] = c.watchHandler
 	c.handlers["notify"] = c.notifyHandler
+	c.handlers["mute"] = c.muteHandler
 
 	Info = make(chan *models.Message, 100)
 	Errs = make(chan *models.ErrorMessage, 10)

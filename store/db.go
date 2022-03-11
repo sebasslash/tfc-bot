@@ -40,8 +40,24 @@ func (r *Redis) init() error {
 	return nil
 }
 
+func (r *Redis) CreateConfigurationKey(ctx context.Context, key *models.ConfigurationKey, configurationID string) error {
+	k := fmt.Sprintf("%s-%s", key.ChannelID, key.WorkspaceID)
+	_, err := r.Client.SetNX(ctx, k, configurationID, 0).Result()
+	return err
+}
+
+func (r *Redis) ReadConfigurationKey(ctx context.Context, key *models.ConfigurationKey) (string, error) {
+	k := fmt.Sprintf("%s-%s", key.ChannelID, key.WorkspaceID)
+	ncID, err := r.Client.Get(ctx, k).Result()
+	if err != nil {
+		return "", err
+	}
+
+	return ncID, nil
+}
+
 func (r *Redis) AddConfiguration(ctx context.Context, configurationID, channelID string) error {
-	_, err := r.Client.SetNX(ctx, configurationID, channelID, redis.KeepTTL).Result()
+	_, err := r.Client.SetNX(ctx, configurationID, channelID, 0).Result()
 	return err
 }
 

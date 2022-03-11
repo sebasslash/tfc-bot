@@ -6,6 +6,11 @@ import (
 	"github.com/hashicorp/go-tfe"
 )
 
+type ConfigurationKey struct {
+	ChannelID   string
+	WorkspaceID string
+}
+
 type RunNotification struct {
 	Message string `json:"message"`
 	Trigger string `json:"trigger"`
