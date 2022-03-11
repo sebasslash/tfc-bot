@@ -56,6 +56,14 @@ func (w *NotificationWorker) CreateConfiguration(ctx context.Context) error {
 		return err
 	}
 
+	err = store.DB.CreateConfigurationKey(ctx, &models.ConfigurationKey{
+		WorkspaceID: w.WorkspaceID,
+		ChannelID:   w.ChannelID,
+	}, nc.ID)
+	if err != nil {
+		return err
+	}
+
 	err = store.DB.AddConfiguration(ctx, nc.ID, w.ChannelID)
 	if err != nil {
 		return err

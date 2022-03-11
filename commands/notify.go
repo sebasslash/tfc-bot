@@ -59,6 +59,7 @@ func (c *CommandManager) notifyHandler(s *discordgo.Session, m *discordgo.Messag
 		rw := &workers.RunWorker{
 			WorkspaceID: w.ID,
 			Info:        Info,
+			Client:      c.Client,
 		}
 
 		err := rw.Subscribe(c.Ctx)
