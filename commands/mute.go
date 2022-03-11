@@ -36,9 +36,13 @@ func (c *CommandManager) muteHandler(s *discordgo.Session, m *discordgo.MessageC
 
 	go func() {
 		nw := &workers.NotificationWorker{
-			ChannelID:   m.ChannelID,
-			WorkspaceID: w.ID,
-			Client:      c.Client,
+			ChannelID:     m.ChannelID,
+			WorkspaceID:   w.ID,
+			WorkspaceName: w.Name,
+			Organization:  w.Organization.Name,
+			Client:        c.Client,
+
+			Info: Info,
 		}
 
 		nw.DisableConfiguration(c.Ctx, ncID)
